@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+runs/
+dataset/
+.DS_Store
+
+# Ignore generated videos outside the static report bundle
+*.mp4
+!report/**/*.mp4

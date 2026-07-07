@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive — Run 1: Flat Tracks</title>
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../archive.css">
+  <script src="../../vendor/plotly.min.js" defer></script>
+  <script src="../archive-app.js" defer></script>
+</head>
+<body data-archive="flat-tracks">
+  <nav class="archive-nav">
+    <a href="../../index.html">Main experiment</a>
+    <span class="current">Run 1 — Flat Tracks</span>
+    <a href="../reverse-exploit/">Run 2 — Reverse Exploit</a>
+  </nav>
+
+  <header class="archive-hero">
+    <div class="hero-split">
+      <div>
+        <span class="archive-badge badge-muted" id="archive-badge">Null result</span>
+        <h1 id="archive-title">Both agents learned — but nothing diverged</h1>
+        <p class="subtitle" id="archive-subtitle">Loading…</p>
+        <div class="archive-meta" id="archive-meta"></div>
+        <div class="story-panel">
+          <p id="archive-story">Loading experiment narrative…</p>
+          <p class="lesson" id="archive-lesson"></p>
+        </div>
+      </div>
+      <div class="video-slot" id="hero-video"></div>
+    </div>
+  </header>
+
+  <main style="max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem 3rem;">
+    <section class="stats-strip">
+      <h2>Evaluation metrics</h2>
+      <div class="stats-grid" id="stats-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Learning curves</h2>
+      <p class="section-lead">Solid lines = mean episode reward. Dotted = episode length (env steps). Both agents converged similarly — no sign of diverging policies.</p>
+      <div class="chart-wrap" id="chart-learning" style="min-height: 380px;"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Speed distribution</h2>
+      <p class="section-lead">Nearly overlapping histograms clustered at top speed. No bimodal braking profile for the time agent — because braking never happened.</p>
+      <div class="chart-wrap" id="chart-histogram"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Speed around the lap</h2>
+      <div class="control-row">
+        <label for="profile-track-select">Track seed</label>
+        <select id="profile-track-select"></select>
+      </div>
+      <div class="chart-wrap" id="chart-profiles"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Lap times by track</h2>
+      <div class="chart-wrap" id="chart-per-track"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Ghost replays</h2>
+      <p class="section-lead">Cyan = time-only, orange = no-brakes. Watch both cars take the same line at the same speed — indistinguishable cornering.</p>
+      <div class="replay-grid" id="replay-grid"></div>
+    </section>
+
+    <footer class="panel" style="margin-top: 2rem;">
+      <p>Dataset: <a href="../../../dataset/archives/flat-tracks/telemetry.csv">telemetry.csv</a> · <a href="../../../dataset/archives/flat-tracks/summary.json">summary.json</a></p>
+      <p style="color: var(--muted); font-size: 0.85rem;">Models archived at <code>runs/archive_flat_tracks/</code></p>
+    </footer>
+  </main>
+</body>
+</html>

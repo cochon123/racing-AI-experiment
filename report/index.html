@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racing AI — Reward Shaping Experiment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero" id="hero">
+    <div class="hero__content">
+      <p class="eyebrow">PPO · Procedural tracks · 2.5M steps</p>
+      <h1>Two agents, one goal:<br><span class="accent-split">lap time</span> vs <span class="accent-split alt">no braking</span></h1>
+      <p class="hero__pitch">
+        Two identical PPO policies learned to drive a top-down racer on procedurally generated circuits.
+        The only difference is reward shaping: one agent optimizes progress alone; the other pays a steep
+        penalty for every deceleration. Same physics, same tracks — divergent cornering styles.
+      </p>
+      <div class="driver-cards" id="driver-cards"></div>
+    </div>
+    <div class="hero__video" id="hero-video"></div>
+  </header>
+
+  <main>
+    <section class="panel" id="setup">
+      <h2>The setup</h2>
+      <div class="setup-grid">
+        <div class="setup-text">
+          <p>
+            The simulator uses simple drift-friendly physics: throttle and steering, lateral grip that
+            breaks into slides, and harsh off-track slowdown. Tracks are procedurally seeded — hairpins,
+            chicanes, and long straights vary per seed.
+          </p>
+          <p>
+            Both agents train with <strong>PPO</strong> on identical observation and action spaces.
+            The <em>time</em> agent maximizes forward progress (lap completion reward).
+            The <em>nobrakes</em> agent gets the same signal minus
+            <code>λ · max(0, v<sub>t−1</sub> − v<sub>t</sub>)</code> — penalizing any speed drop step-to-step.
+          </p>
+        </div>
+        <figure class="setup-diagram" aria-label="Reward comparison diagram">
+          <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="180" fill="#161b24" rx="8"/>
+            <path d="M20 140 Q80 40 160 100 T300 60" fill="none" stroke="#2a2f3a" stroke-width="24" stroke-linecap="round"/>
+            <path d="M20 140 Q80 40 160 100 T300 60" fill="none" stroke="#2a2f3a" stroke-width="2" stroke-dasharray="4 4"/>
+            <circle cx="80" cy="55" r="6" fill="#22d3ee"/>
+            <text x="92" y="58" fill="#22d3ee" font-size="11" font-family="monospace">brake ↓</text>
+            <circle cx="200" cy="95" r="6" fill="#fb923c"/>
+            <text x="212" y="98" fill="#fb923c" font-size="11" font-family="monospace">carry speed →</text>
+            <text x="20" y="24" fill="#8b949e" font-size="10" font-family="sans-serif">Same track · same algo · different reward</text>
+          </svg>
+          <figcaption>Corner approach: time brakes; no-brakes carries momentum.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="stats-strip" id="key-results">
+      <h2 class="sr-only">Key results</h2>
+      <div class="stats-grid" id="stats-grid"></div>
+    </section>
+
+    <section class="panel" id="speed-distribution">
+      <h2>Speed distribution</h2>
+      <p class="section-lead">
+        Normalized speed histograms across all evaluation laps. Time-only shows a
+        <strong>bimodal</strong> profile — slow in braking zones, fast on straights. No-brakes clusters
+        at higher speeds with a narrow spread: it rarely sheds velocity, even when geometry demands it.
+      </p>
+      <div class="chart-wrap" id="chart-histogram"></div>
+      <div class="control-row" style="margin-top: 1.5rem;">
+        <h3 style="margin: 0; font-size: 1rem;">Distribution over training</h3>
+      </div>
+      <p class="section-lead" style="margin-top: 0.5rem;">
+        Same histograms replayed at each checkpoint (~250k steps). Cyan converges on forward racing speed;
+        orange collapses toward the reverse-gear crawl as the no-brakes policy settles on its hack.
+      </p>
+      <div class="video-slot" style="max-width: 100%;">
+        <video controls preload="metadata" playsinline style="width:100%;border-radius:8px;background:#0e1116;">
+          <source src="assets/videos/speed_distribution_evolution.mp4" type="video/mp4">
+        </video>
+      </div>
+    </section>
+
+    <section class="panel" id="speed-profiles">
+      <h2>Speed around the lap</h2>
+      <p class="section-lead">
+        Speed vs normalized track position. Dips mark braking zones; flat high plateaus mean carrying speed
+        through corners (often with drift). Select a track seed to compare line choice.
+      </p>
+      <div class="control-row">
+        <label for="profile-track-select">Track seed</label>
+        <select id="profile-track-select"></select>
+      </div>
+      <div class="chart-wrap" id="chart-profiles"></div>
+    </section>
+
+    <section class="panel" id="learning-curves">
+      <h2>Learning curves</h2>
+      <p class="section-lead">
+        Episode reward vs environment steps. The deceleration penalty keeps nobrakes&apos;s raw reward lower
+        even when lap times converge — it learns a different policy, not a worse optimizer.
+      </p>
+      <div class="chart-wrap" id="chart-learning"></div>
+    </section>
+
+    <section class="panel" id="race-replays">
+      <h2>Race replays</h2>
+      <p class="section-lead">Side-by-side overlay footage from evaluation runs. Videos render after the evaluate pipeline completes.</p>
+      <div class="replay-grid" id="replay-grid"></div>
+    </section>
+
+    <section class="panel" id="per-track">
+      <h2>Per-track results</h2>
+      <p class="section-lead">Lap times by seed. Twisty tracks (19, 42, 55) widen the gap — no-brakes runs wide or DNFs.</p>
+      <div class="chart-wrap" id="chart-per-track"></div>
+    </section>
+
+    <section class="panel prose" id="takeaways">
+      <h2>Intuition &amp; takeaways</h2>
+      <div class="prose-columns">
+        <div>
+          <h3>Reward shaping steers style, not just score</h3>
+          <p>
+            Penalizing deceleration doesn&apos;t forbid slowing down — it makes every brake expensive. The
+            nobrakes agent finds local optima where momentum and drift substitute for classic apex braking.
+            On open tracks it nearly matches time-only; on tight sequences it pays in lap time and off-track time.
+          </p>
+          <h3>What changed in behavior</h3>
+          <ul>
+            <li><span class="dot time"></span> Time-only: hard brakes, lower mean speed, fewer drifts, faster mean lap.</li>
+            <li><span class="dot nobrakes"></span> No-brakes: high sustained speed, more drift and off-track, fewer brake events.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Caveats</h3>
+          <ul class="caveats">
+            <li>Single training seed per agent — results are illustrative, not a rigorous sweep.</li>
+            <li>2D top-down physics simplify weight transfer and tire models.</li>
+            <li>Deceleration penalty is step-wise; real racing rewards line and exit speed differently.</li>
+            <li>Evaluation set is fixed at <span id="n-tracks">—</span> procedural seeds.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="footer-grid">
+      <div>
+        <h3>Archived runs</h3>
+        <ul class="link-list">
+          <li><a href="archives/flat-tracks/">Run 1 — Flat tracks (null result)</a></li>
+          <li><a href="archives/reverse-exploit/">Run 2 — Reverse exploit (reward hack)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Dataset</h3>
+        <ul class="link-list">
+          <li><a href="../dataset/telemetry.csv">telemetry.csv</a> — step-level logs</li>
+          <li><a href="../dataset/summary.json">summary.json</a> — aggregated metrics</li>
+        </ul>
+      </div>
+      <div>
+        <h3>CLI cheatsheet</h3>
+        <pre><code>python -m racing play --seed 7          # drive yourself
+python -m racing race --vs nobrakes     # you vs an AI
+python -m racing watch --seed 3         # AI vs AI live
+python -m racing train --agent both     # retrain
+python -m racing evaluate               # rebuild dataset
+python -m racing report                 # rebuild charts + serve this page</code></pre>
+      </div>
+    </div>
+    <p class="footer-meta">Racing AI experiment · <span id="experiment-date">—</span></p>
+  </footer>
+
+  <script src="vendor/plotly.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

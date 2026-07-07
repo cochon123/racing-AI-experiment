@@ -1,0 +1,10 @@
+# Core (torch is expected to be pre-installed with CUDA support)
+gymnasium>=1.3
+stable-baselines3>=2.9
+pygame-ce>=2.5
+numpy
+pandas
+matplotlib
+plotly>=6
+imageio>=2.37
+imageio-ffmpeg

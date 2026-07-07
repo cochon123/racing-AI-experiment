@@ -1,0 +1,165 @@
+{
+  "experiment": {
+    "train_steps": 1511424,
+    "n_eval_tracks": 8,
+    "decel_penalty_coef": 0.6,
+    "algo": "PPO",
+    "date": "2026-07-06",
+    "archive_slug": "flat-tracks",
+    "archive_title": "Run 1 \u2014 Flat Tracks",
+    "failure_mode": "null_result",
+    "headline": "Both agents learned to race \u2014 but the experiment had nothing to measure",
+    "subtitle": "Tracks were too gentle; every corner was flat-out. Braking never became optimal.",
+    "story": "The first training run completed successfully: both PPO agents reached ~+1,140 mean episode reward and lapped every eval track. On paper, the experiment worked. In practice, the procedurally generated circuits were too wide and smooth \u2014 minimum corner radii averaged ~32 units on a ~31-unit-wide track, so a good racing line never required shedding speed. Telemetry showed brake input at 0.0% for both agents, nearly identical speed histograms clustered near top speed (~38 u/s), and lap times within 1\u20132%. Penalizing deceleration could not change behavior that never decelerated in the first place.",
+    "lesson": "Reward shaping only reveals differences when the task forces a tradeoff. If the environment never rewards braking, both objectives collapse to \u201chold throttle and steer.\u201d",
+    "track_profile_label": "Gentle (original generator)",
+    "decel_penalty_label": "\u03bb = 0.6",
+    "badge": "Null result",
+    "badge_class": "badge-muted",
+    "runs_dir": "runs/archive_flat_tracks",
+    "final_time_reward": 1177.9979248046875,
+    "final_time_ep_len": 1801.0,
+    "final_nobrakes_reward": 1140.97216796875,
+    "final_nobrakes_ep_len": 1801.0
+  },
+  "agents": {
+    "time": {
+      "label": "Time Optimizer",
+      "color": "#22d3ee",
+      "mean_lap_time": 41.587499999998926,
+      "best_lap_time": 36.0666666666659,
+      "mean_speed": 38.09130012324117,
+      "std_speed": 4.742682705490855,
+      "offtrack_fraction": 0.0,
+      "drift_fraction": 0.005109196553796835,
+      "hard_brake_events_per_lap": 0.0,
+      "dnf_rate": 0.0
+    },
+    "nobrakes": {
+      "label": "No-Brakes Optimizer",
+      "color": "#fb923c",
+      "mean_lap_time": 42.33333333333221,
+      "best_lap_time": 36.63333333333254,
+      "mean_speed": 38.32620412228895,
+      "std_speed": 4.479189594017216,
+      "offtrack_fraction": 0.0,
+      "drift_fraction": 0.0,
+      "hard_brake_events_per_lap": 0.0,
+      "dnf_rate": 0.0
+    }
+  },
+  "per_track": [
+    {
+      "seed": 1000,
+      "lap_time": {
+        "time": 36.73333333333253,
+        "nobrakes": 37.616666666665814
+      },
+      "mean_speed": {
+        "time": 38.07622458060536,
+        "nobrakes": 38.31651475278894
+      },
+      "video": "assets/videos/track_1000_overlay.mp4"
+    },
+    {
+      "seed": 1001,
+      "lap_time": {
+        "time": 45.89999999999868,
+        "nobrakes": 46.6666666666653
+      },
+      "mean_speed": {
+        "time": 38.41840801810872,
+        "nobrakes": 38.586252714629694
+      },
+      "video": "assets/videos/track_1001_overlay.mp4"
+    },
+    {
+      "seed": 1002,
+      "lap_time": {
+        "time": 40.04999999999901,
+        "nobrakes": 40.149999999999004
+      },
+      "mean_speed": {
+        "time": 37.18190633198056,
+        "nobrakes": 37.55212970533583
+      },
+      "video": "assets/videos/track_1002_overlay.mp4"
+    },
+    {
+      "seed": 1003,
+      "lap_time": {
+        "time": 36.0666666666659,
+        "nobrakes": 36.63333333333254
+      },
+      "mean_speed": {
+        "time": 37.785667888823994,
+        "nobrakes": 38.04255404089678
+      },
+      "video": "assets/videos/track_1003_overlay.mp4"
+    },
+    {
+      "seed": 1004,
+      "lap_time": {
+        "time": 42.26666666666555,
+        "nobrakes": 43.216666666665496
+      },
+      "mean_speed": {
+        "time": 38.24235996370681,
+        "nobrakes": 38.46460817680901
+      },
+      "video": "assets/videos/track_1004_overlay.mp4"
+    },
+    {
+      "seed": 1005,
+      "lap_time": {
+        "time": 43.23333333333216,
+        "nobrakes": 44.21666666666544
+      },
+      "mean_speed": {
+        "time": 38.31483062562238,
+        "nobrakes": 38.5108935264086
+      },
+      "video": "assets/videos/track_1005_overlay.mp4"
+    },
+    {
+      "seed": 1006,
+      "lap_time": {
+        "time": 43.6999999999988,
+        "nobrakes": 44.2833333333321
+      },
+      "mean_speed": {
+        "time": 38.01991694352953,
+        "nobrakes": 38.291482022965695
+      },
+      "video": "assets/videos/track_1006_overlay.mp4"
+    },
+    {
+      "seed": 1007,
+      "lap_time": {
+        "time": 44.74999999999874,
+        "nobrakes": 45.88333333333201
+      },
+      "mean_speed": {
+        "time": 38.53961844102951,
+        "nobrakes": 38.6986915244591
+      },
+      "video": "assets/videos/track_1007_overlay.mp4"
+    }
+  ],
+  "telemetry_extras": {
+    "time": {
+      "brake_input_fraction": 0.0,
+      "reverse_fraction": 0.0,
+      "mean_throttle": 1.0,
+      "p5_speed": 31.824918939430123,
+      "p95_speed": 41.10579893988258
+    },
+    "nobrakes": {
+      "brake_input_fraction": 0.0,
+      "reverse_fraction": 0.0,
+      "mean_throttle": 1.0,
+      "p5_speed": 33.855805345105054,
+      "p95_speed": 40.93804365056108
+    }
+  }
+}

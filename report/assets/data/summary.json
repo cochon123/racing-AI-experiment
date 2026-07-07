@@ -1,0 +1,229 @@
+{
+  "experiment": {
+    "train_steps": 1511424,
+    "n_eval_tracks": 16,
+    "decel_penalty_coef": 1.0,
+    "algo": "PPO",
+    "date": "2026-07-06"
+  },
+  "agents": {
+    "time": {
+      "label": "Time Optimizer",
+      "color": "#22d3ee",
+      "mean_lap_time": null,
+      "best_lap_time": 33.566666666666045,
+      "mean_speed": 38.17265812025224,
+      "std_speed": 4.585029063270457,
+      "offtrack_fraction": 0.0,
+      "drift_fraction": 0.003124138564733989,
+      "hard_brake_events_per_lap": 0.0,
+      "dnf_rate": 0.0
+    },
+    "nobrakes": {
+      "label": "No-Brakes Optimizer",
+      "color": "#fb923c",
+      "mean_lap_time": null,
+      "best_lap_time": null,
+      "mean_speed": 5.856023216013936,
+      "std_speed": 0.7193229462692681,
+      "offtrack_fraction": 0.0,
+      "drift_fraction": 0.9574194891726818,
+      "hard_brake_events_per_lap": null,
+      "dnf_rate": 1.0
+    }
+  },
+  "per_track": [
+    {
+      "seed": 1000,
+      "lap_time": {
+        "time": 40.7833333333323,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 37.77536089041574,
+        "nobrakes": 5.855646222310648
+      },
+      "video": "assets/videos/track_1000_overlay.mp4"
+    },
+    {
+      "seed": 1001,
+      "lap_time": {
+        "time": 48.01666666666522,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.52917161538181,
+        "nobrakes": 5.857513237821361
+      },
+      "video": "assets/videos/track_1001_overlay.mp4"
+    },
+    {
+      "seed": 1002,
+      "lap_time": {
+        "time": 44.44999999999876,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 37.835464335387485,
+        "nobrakes": 5.85649898809928
+      },
+      "video": "assets/videos/track_1002_overlay.mp4"
+    },
+    {
+      "seed": 1003,
+      "lap_time": {
+        "time": 47.98333333333189,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.27700698146256,
+        "nobrakes": 5.8551965291844414
+      },
+      "video": "assets/videos/track_1003_overlay.mp4"
+    },
+    {
+      "seed": 1004,
+      "lap_time": {
+        "time": 43.13333333333217,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 37.36643794587156,
+        "nobrakes": 5.8557258352773776
+      },
+      "video": "assets/videos/track_1004_overlay.mp4"
+    },
+    {
+      "seed": 1005,
+      "lap_time": {
+        "time": 47.01666666666528,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.556475471533176,
+        "nobrakes": 5.855528159871491
+      },
+      "video": "assets/videos/track_1005_overlay.mp4"
+    },
+    {
+      "seed": 1006,
+      "lap_time": {
+        "time": 47.63333333333191,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.87343439735991,
+        "nobrakes": 5.855795992874855
+      },
+      "video": "assets/videos/track_1006_overlay.mp4"
+    },
+    {
+      "seed": 1007,
+      "lap_time": {
+        "time": 43.63333333333214,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.379169296170616,
+        "nobrakes": 5.856268905868867
+      },
+      "video": "assets/videos/track_1007_overlay.mp4"
+    },
+    {
+      "seed": 1008,
+      "lap_time": {
+        "time": 46.23333333333199,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.36140170673194,
+        "nobrakes": 5.856403368714445
+      },
+      "video": "assets/videos/track_1008_overlay.mp4"
+    },
+    {
+      "seed": 1009,
+      "lap_time": {
+        "time": 52.39999999999831,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.57019356446264,
+        "nobrakes": 5.855580162878002
+      },
+      "video": "assets/videos/track_1009_overlay.mp4"
+    },
+    {
+      "seed": 1010,
+      "lap_time": {
+        "time": 45.983333333332006,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.222531392390046,
+        "nobrakes": 5.8559482547776724
+      },
+      "video": "assets/videos/track_1010_overlay.mp4"
+    },
+    {
+      "seed": 1011,
+      "lap_time": {
+        "time": 50.19999999999843,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.91083663826728,
+        "nobrakes": 5.855807420532159
+      },
+      "video": "assets/videos/track_1011_overlay.mp4"
+    },
+    {
+      "seed": 1012,
+      "lap_time": {
+        "time": 45.46666666666537,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 37.567697458265926,
+        "nobrakes": 5.855834846589438
+      },
+      "video": "assets/videos/track_1012_overlay.mp4"
+    },
+    {
+      "seed": 1013,
+      "lap_time": {
+        "time": 47.116666666665274,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.0274461219454,
+        "nobrakes": 5.8565474408056195
+      },
+      "video": "assets/videos/track_1013_overlay.mp4"
+    },
+    {
+      "seed": 1014,
+      "lap_time": {
+        "time": 33.566666666666045,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 36.69880529023851,
+        "nobrakes": 5.855984789493446
+      },
+      "video": "assets/videos/track_1014_overlay.mp4"
+    },
+    {
+      "seed": 1015,
+      "lap_time": {
+        "time": 41.783333333332244,
+        "nobrakes": null
+      },
+      "mean_speed": {
+        "time": 38.132379872552114,
+        "nobrakes": 5.856091301123876
+      },
+      "video": "assets/videos/track_1015_overlay.mp4"
+    }
+  ]
+}
