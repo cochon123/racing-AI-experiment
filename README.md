@@ -46,6 +46,6 @@ python -m racing selftest               # headless sanity checks
 
 After deploy, the static reports are served from the `report/` folder:
 
-- [Main experiment — reward shaping comparison](https://cochon123.github.io/racing-AI-experiment/)
-- [Archive: flat tracks (null result)](https://cochon123.github.io/racing-AI-experiment/archives/flat-tracks/)
-- [Archive: reverse exploit (reward hack)](https://cochon123.github.io/racing-AI-experiment/archives/reverse-exploit/)
+- [Main experiment — reward shaping comparison](https://cochon123.github.io/racing-AI-experiment/report/)
+- [Archive: flat tracks (null result)](https://cochon123.github.io/racing-AI-experiment/report/archives/flat-tracks/)
+- [Archive: reverse exploit (reward hack)](https://cochon123.github.io/racing-AI-experiment/report/archives/reverse-exploit/)
